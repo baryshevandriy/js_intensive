@@ -12,12 +12,12 @@
    <script>
       function calculation() {
          var temp = RegExp(/[0-9]+/);
-         var valueFirst = prompt("Enter the first value(it must be a number): ");
+         var valueFirst = prompt("Enter the first value(it should be a number): ");
          if (!temp.test(valueFirst)) {
             console.log("Некорректный ввод!");
             return;
          }
-         var valueSecond = prompt("Enter the second value(it must be a number): ");
+         var valueSecond = prompt("Enter the second value(it should be a number): ");
          if (!temp.test(valueSecond)) {
             console.log("Некорректный ввод!");
             return;
