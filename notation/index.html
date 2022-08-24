@@ -10,8 +10,8 @@
 
 <body>
    <script>
-      var valueFirst = prompt("Enter the first value(it must be a number): ");
-      var valueSecond = prompt("Enter the second value(it must be a number): ");
+      var valueFirst = prompt("Enter the first value(it should be a number): ");
+      var valueSecond = prompt("Enter the second value(it should be a number): ");
       var temp = RegExp(/[0-9]+/);
       if (temp.test(valueFirst) && temp.test(valueSecond)) {
          console.log(Number(valueFirst).toString(Number(valueSecond)));
