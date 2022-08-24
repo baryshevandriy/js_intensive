@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <script>
+      function calculation() {
+         var temp = RegExp(/[0-9]+/);
+         var valueFirst = prompt("Enter the first value(it must be a number): ");
+         if (!temp.test(valueFirst)) {
+            console.log("Некорректный ввод!");
+            return;
+         }
+         var valueSecond = prompt("Enter the second value(it must be a number): ");
+         if (!temp.test(valueSecond)) {
+            console.log("Некорректный ввод!");
+            return;
+         }
+         valueFirst = Number(valueFirst);
+         valueSecond = Number(valueSecond);
+         console.log(valueFirst + valueSecond, valueFirst / valueSecond);
+      }
+
+      calculation();
+
+   </script>
+</body>
+
+</html>
