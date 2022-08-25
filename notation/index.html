@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <script>
+      var valueFirst = prompt("Enter the first value(it should be a number): ");
+      var valueSecond = prompt("Enter the second value(it should be a number): ");
+      var temp = RegExp(/[0-9]+/);
+      if (temp.test(valueFirst) && temp.test(valueSecond)) {
+         console.log(Number(valueFirst).toString(Number(valueSecond)));
+      }
+      else {
+         console.log("Некорректный ввод!");
+      }
+   </script>
+</body>
+
+</html>
