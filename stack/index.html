@@ -1,0 +1,29 @@
+<script type="text/javascript">
+   /*
+Реализация стека
+Реализованы методы: вставка элемента(push), удаление элемента(pop)
+*/
+//! Стек
+
+function stack() { // Сложность: O(1)
+   this.size = 0;
+   this.storage = {};
+}
+
+stack.prototype.push = function (value) { // Сложность: O(1)
+   this.size += 1;
+   var size = this.size;
+   this.storage[size] = value;
+}
+
+stack.prototype.pop = function () { // Сложность: O(1)
+   var size = this.size;
+   var upperValue;
+   if (size !== 0) {
+      upperValue = this.storage[size];
+      delete this.storage[size];
+      this.size -= 1;
+      return upperValue;
+   }
+}
+</script>
