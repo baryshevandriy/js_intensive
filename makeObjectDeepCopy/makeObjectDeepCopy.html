@@ -1,0 +1,22 @@
+<script>
+function makeObjectDeepCopy(objectForCopy) {
+   if (Array.isArray(objectForCopy)) {
+      let result = [];
+      objectForCopy.forEach(function (elem) {
+         result.push(makeObjectDeepCopy(elem));
+      });
+      return result;
+   }
+   else if (typeof objectForCopy == "object") {
+      let result = {};
+      var arrayKeys = Object.keys(objectForCopy);
+      arrayKeys.forEach(function (elem) {
+         result[elem] = makeObjectDeepCopy(objectForCopy[elem]);
+      });
+      return result;
+   }
+   else {
+      return objectForCopy;
+   }
+}
+</script>
