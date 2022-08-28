@@ -1,0 +1,35 @@
+<script>
+function testArr(array) {
+   array.forEach(element => {
+      if (typeof element != "number") {
+         throw Error(`${element} isn't a number`);
+      }
+   });
+}
+
+function testBoundary(leftSide, rightSide) {
+   if (typeof leftSide != "number") {
+      throw Error(`${leftSide} isn't a number`);
+   }
+   if (typeof rightSide != "number") {
+      throw Error(`${rightSide} isn't a number`);
+   }
+}
+
+function selectFromInterval(arrDigits, leftSide, rightSide) {
+   testArr(arrDigits);
+   testBoundary(leftSide, rightSide);
+   if (leftSide > rightSide) {
+      var buf = rightSide;
+      rightSide = leftSide;
+      leftSide = buf;
+   }
+   var result = [];
+   arrDigits.forEach(element => {
+      if (element <= rightSide && element >= leftSide) {
+         result.push(element);
+      }
+   });
+   return result;
+}
+</script>
