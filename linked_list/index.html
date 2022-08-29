@@ -1,0 +1,120 @@
+<script type="text/javascript">
+	/*
+Реализация однонаправленного связного списка.
+Реализованы методы: добавление узла в конец списка(append), добавление узла в начало списка(prepend), удаление первого узла списка(deleteHead),
+удаление последнего узла списка(deleteTail), печать значений списка(printList), поиска узла(find), получение массива из списка(toArray)
+Функции: получение списка из массива(fromArray)
+Геттеры: длина списка(length) 
+*/
+//! Однонаправленный связный список
+
+//Конструктор однонаправленного связного списка с параметром значения, которое по умолчанию null
+function listNode(value = null) {
+   this.value = value;
+   this.next = null;
+
+   Object.defineProperty(this, "length", { // Сложность: O(n)
+      get() {
+         var ptr = this;
+         var counter = 1;
+         while (ptr.next != null) {
+            counter += 1;
+            ptr = ptr.next;
+         }
+         return counter;
+      }
+   });
+}
+
+listNode.prototype.append = function (value) { // Сложность: O(n)
+   var node = new listNode(value);
+   var ptr = this;
+   while (ptr.next != null) {
+      ptr = ptr.next;
+   }
+   ptr.next = node;
+}
+
+listNode.prototype.prepend = function (value) { // Сложность: O(1)
+   var secondElem = new listNode(this.value);
+   this.value = value;
+   var thirdElemChain = this.next;
+   this.next = secondElem;
+   secondElem.next = thirdElemChain;
+}
+
+listNode.prototype.deleteHead = function () { // Сложность: O(1)
+   if (this.next == null) {
+      return;
+   }
+   var ptr = this.next;
+   this.value = ptr.value;
+   this.next = ptr.next;
+}
+
+listNode.prototype.deleteTail = function () { // Сложность: O(n)
+   var ptr = this;
+   if (ptr.next == null) {
+      return;
+   }
+   while (ptr.next != null) {
+      if (ptr.next.next == null) {
+         ptr.next = null;
+         return;
+      }
+      ptr = ptr.next;
+   }
+}
+
+listNode.prototype.printList = function () { // Сложность: O(n)
+   var ptr = this;
+   console.log("--------");
+   while (ptr != null) {
+      console.log(`cur:(${ptr.value}) -> next:(${ptr.next ? ptr.next.value : null})`);
+      ptr = ptr.next;
+   }
+   console.log("--------");
+}
+
+listNode.prototype.find = function (value) { // Сложность: O(n)
+   var ptr = this;
+   if (ptr.next === null) {
+      if (ptr.value === value) {
+         return ptr;
+      }
+      return false;
+   }
+   while (ptr.next != null) {
+      if (ptr.value === value) {
+         return ptr;
+      }
+      ptr = ptr.next;
+   }
+   return false;
+}
+
+listNode.prototype.toArray = function () { // Сложность: O(n)
+   var ptr = this;
+   var result = new Array();
+   while (ptr != null) {
+      result.push(ptr.value);
+      ptr = ptr.next;
+   }
+   return result;
+}
+
+function fromArray(array, constructor) { // Сложность: O(n)
+   if (array.length === 0) {
+      return new constructor();
+   }
+   else if (array.length === 1) {
+      return new constructor(array[0]);
+   }
+   var listArr = new constructor(array[0]);
+   for (var i = 1; i < array.length; i++) {
+      listArr.append(array[i]);
+   }
+   return listArr;
+}
+
+</script>
