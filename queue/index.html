@@ -1,0 +1,40 @@
+<script type="text/javascript">
+	/*
+Реализация очереди
+Реализованы методы: добавление в очередь(enqueue), извлечение из очереди(dequeue)
+Геттеры: размер очереди(size)
+*/
+//! Очередь
+
+
+function queue() { // Сложность: O(1)
+   this.oldestIndex = 1;
+   this.newestIndex = 1;
+   this.storage = {};
+
+   Object.defineProperty(this, "size", { // Сложность: O(1)
+      get() {
+         return this.newestIndex - this.oldestIndex;
+      }
+   })
+}
+
+queue.prototype.enqueue = function (value) { // Сложность: O(1)
+   this.storage[this.newestIndex] = value;
+   this.newestIndex += 1;
+}
+
+queue.prototype.dequeue = function () { // Сложность: O(1)
+   var oldestIndex = this.oldestIndex;
+   var newestIndex = this.newestIndex;
+   var dequeueValue;
+
+   if (oldestIndex !== newestIndex) {
+      dequeueValue = this.storage[oldestIndex];
+      delete this.storage[oldestIndex];
+      this.oldestIndex += 1;
+
+      return dequeueValue;
+   }
+}
+</script>
