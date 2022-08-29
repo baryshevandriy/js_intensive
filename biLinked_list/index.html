@@ -1,0 +1,131 @@
+<script type="text/javascript">
+	/*
+Реализация двунаправленного связного списка
+Реализованы методы: добавление узла в конец списка(append), добавление узла в начало списка(prepend), удаление первого узла списка(deleteHead),
+удаление последнего узла списка(deleteTail), печать значений списка(printList), поиска узла(find), получение массива из списка(toArray)
+Функции: получение списка из массива(fromArray)
+Геттеры: длина списка(length)
+*/
+//! Двунаправленный связный список
+
+//Конструктор двунаправленного связного списка с параметром значения, которое по умолчанию null
+function biLinked(value = null) {
+   this.value = value;
+   this.next = null;
+   this.prev = null;
+
+   Object.defineProperty(this, "length", { // Сложность: O(n)
+      get() {
+         var ptr = this;
+         var counter = 1;
+         while (ptr.next != null) {
+            counter += 1;
+            ptr = ptr.next;
+         }
+         return counter;
+      }
+   });
+}
+
+biLinked.prototype.append = function (value) { // Сложность: O(n)
+   var node = new biLinked(value);
+   var ptr = this;
+   while (ptr.next != null) {
+      ptr = ptr.next;
+   }
+   ptr.next = node;
+   node.prev = ptr;
+}
+
+biLinked.prototype.prepend = function (value) { // Сложность: O(1)
+   var ptr = this;
+   var secondElem = new biLinked(this.value);
+   if (ptr.next == null) {
+      this.value = value;
+      this.next = secondElem;
+      secondElem.prev = this;
+      return;
+   }
+   this.value = value;
+   var thirdElemChain = this.next;
+   thirdElemChain.prev = secondElem;
+   this.next = secondElem;
+   secondElem.next = thirdElemChain;
+   secondElem.prev = this;
+}
+
+biLinked.prototype.deleteHead = function () { // Сложность: O(1)
+   if (this.next == null) {
+      return;
+   }
+   var ptr = this.next;
+   this.value = ptr.value;
+   this.next = ptr.next;
+}
+
+biLinked.prototype.deleteTail = function () { // Сложность: O(n)
+   var ptr = this;
+   if (ptr.next == null) {
+      return;
+   }
+   while (ptr.next != null) {
+      if (ptr.next.next == null) {
+         ptr.next = null;
+         return;
+      }
+      ptr = ptr.next;
+   }
+}
+
+biLinked.prototype.printBiLinkedList = function () { // Сложность: O(n)
+   var ptr = this;
+   console.log("--------");
+   while (ptr != null) {
+      console.log(`prev:(${ptr.prev ? ptr.prev.value : null}) <- cur:(${ptr.value}) -> next:(${ptr.next ? ptr.next.value : null})`);
+      ptr = ptr.next;
+   }
+   console.log("--------");
+}
+
+biLinked.prototype.find = function (value) {  // Сложность: O(n)
+   var ptr = this;
+   if (ptr.next === null) {
+      if (ptr.value === value) {
+         return ptr;
+      }
+      return false;
+   }
+   while (ptr.next != null) {
+      if (ptr.value === value) {
+         return ptr;
+      }
+      ptr = ptr.next;
+   }
+   return false;
+}
+
+biLinked.prototype.toArray = function () { // Сложность: O(n)
+   var ptr = this;
+   var result = new Array();
+   while (ptr != null) {
+      result.push(ptr.value);
+      ptr = ptr.next;
+   }
+   return result;
+}
+
+function fromArray(array, constructor) { // Сложность: O(n)
+   if (array.length === 0) {
+      return new constructor();
+   }
+   else if (array.length === 1) {
+      return new constructor(array[0]);
+   }
+   var listArr = new constructor(array[0]);
+   for (var i = 1; i < array.length; i++) {
+      listArr.append(array[i]);
+   }
+   return listArr;
+}
+
+</script>
