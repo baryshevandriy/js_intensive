@@ -1,0 +1,33 @@
+<script type="text/javascript">
+
+/*
+   Реализация итерируемого объекта
+*/
+
+const myIterable = {
+   from: 1,
+   to: 4
+};
+
+myIterable[Symbol.iterator] = function () {
+   const testReg = RegExp(/[0-9]+/);
+   if (testReg.test(this.from) && testReg.test(this.to) && this.from < this.to && this.from != "undefined" && this.to != "undefined") {
+      return {
+         cur: this.from,
+         last: this.to,
+         next() {
+            if (this.cur <= this.last) {
+               return { done: false, value: this.cur++ };
+            }
+            else {
+               return { done: true };
+            }
+         }
+      }
+   }
+   else {
+      throw new Error(`${this.from} or ${this.to} isn't correct`);
+   }
+}
+
+</script>
