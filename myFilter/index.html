@@ -1,0 +1,31 @@
+<script type="text/javascript">
+
+/*
+	Реализация метода myFilter для массива
+*/
+
+Array.prototype.myFilter = function (callback, thisArg) {
+   if (this == null) {
+      throw new Error("Error: object is undefined or null");
+   }
+   let context = this;
+   let obj = Object(this);
+   if (arguments.length > 1) {
+      context = thisArg;
+   }
+   if (typeof callback !== 'function') {
+      throw new Error(`${callback} is not a function`);
+   }
+   let result = [];
+   for (var i = 0; i < obj.length; i++) {
+      if (i in obj) {
+         var cur = this[i];
+         if (callback.call(context, cur, i, obj)) {
+            result.push(cur);
+         }
+      }
+   }
+   return result;
+}
+
+</script>
