@@ -1,0 +1,15 @@
+<script type="text/javascript">
+/*
+	Реализация debounce-функции
+*/
+	function createDebounceFunction(callback, delay) {
+   let myTimeOut;
+   return () => {
+      clearTimeout(myTimeOut);
+      myTimeOut = setTimeout(() => {
+         callback.apply(this, arguments);
+      },
+         delay);
+   }
+}
+</script>
