@@ -1,0 +1,47 @@
+<script type="text/javascript">
+	class Calculator {
+   constructor(x, y) {
+      let testReg = /^[0-9]+$/;
+      if (!testReg.test(x) || !testReg.test(y)) {
+         throw new Error(`${x} or ${y} isn't valid number`);
+      }
+      this.x = x;
+      this.y = y;
+   }
+
+   setX(num) {
+      let testReg = /^[0-9]+$/;
+      if (!testReg.test(num)) {
+         throw new Error(`${num} isn't valid number`);
+      }
+      this.x = num;
+   }
+
+   setY(num) {
+      let testReg = /^[0-9]+$/;
+      if (!testReg.test(num)) {
+         throw new Error(`${num} isn't valid number`);
+      }
+      this.y = num;
+   }
+
+   logSum() {
+      console.log(Number(this.x) + Number(this.y));
+   }
+
+   logMul() {
+      console.log(this.x * this.y);
+   }
+
+   logSub() {
+      console.log(this.x - this.y);
+   }
+
+   logDiv() {
+      if (this.y == 0) {
+         throw new Error(`Error: can't divide by zero`);
+      }
+      console.log(Number(this.x) / Number(this.y));
+   }
+}
+</script>
